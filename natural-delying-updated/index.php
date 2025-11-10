@@ -1,0 +1,87 @@
+<?php session_start(); ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Delying - Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <div class="navbar">
+        <h1>NATURAL DELYING</h1>
+        <nav>
+            <a href="index.php">INICIO</a>
+            <a href="productos.php">PRODUCTOS</a>
+            <?php if (isset($_SESSION['es_admin']) && $_SESSION['es_admin']): ?>
+                <a href="admin/index.php">ADMIN</a>
+            <?php endif; ?>
+        </nav>
+        <div class="user-icon">
+            <?php if (isset($_SESSION['usuario_id'])): ?>
+                <a href="cart/view_cart.php">🛒</a>
+                <a href="auth/logout.php">Logout</a>
+            <?php else: ?>
+                <a href="auth/login.php">👤</a>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <!-- Banner -->
+        <div class="banner">
+            <h2>TU SALUD ES VITAL PARA NOSOTROS</h2>
+        </div>
+
+        <!-- Logo central -->
+        <div class="logo-section">
+            <svg width="400" height="400" viewBox="0 0 400 400" xmlns="">
+                <!-- Escudo azul -->
+                <path d="M200 80 L280 120 L280 280 L200 340 L120 280 L120 120 Z" fill="#4a9fd8" stroke="#2d7ab8" stroke-width="3"/>
+
+                <!-- Texto MUDALITY GREEN en rosa -->
+                <text x="200" y="130" font-family="Arial Black" font-size="32" fill="#ff69b4" text-anchor="middle" font-weight="bold">MUDALITY</text>
+                <text x="200" y="160" font-family="Arial Black" font-size="32" fill="#ff69b4" text-anchor="middle" font-weight="bold">GREEN</text>
+
+                <!-- Vaso de jugo -->
+                <ellipse cx="200" cy="240" rx="30" ry="35" fill="#ff9999"/>
+                <path d="M170 240 Q170 270 200 280 Q230 270 230 240" fill="#ffb3b3"/>
+                <rect x="195" y="200" width="10" height="15" fill="#ffd700"/>
+                <circle cx="205" cy="195" r="8" fill="#ffff00"/>
+
+                <!-- Croissant -->
+                <ellipse cx="240" cy="270" rx="25" ry="15" fill="#d2691e" transform="rotate(-20 240 270)"/>
+                <ellipse cx="235" cy="275" rx="20" ry="12" fill="#cd853f" transform="rotate(-20 235 275)"/>
+
+                <!-- Nueces -->
+                <circle cx="170" cy="260" r="12" fill="#d2b48c"/>
+                <circle cx="165" cy="275" r="10" fill="#daa520"/>
+                <circle cx="180" cy="270" r="11" fill="#cd853f"/>
+
+                <!-- Hojas verdes (izquierda) -->
+                <ellipse cx="140" cy="180" rx="8" ry="25" fill="#228b22" transform="rotate(-30 140 180)"/>
+                <ellipse cx="135" cy="200" rx="8" ry="25" fill="#32cd32" transform="rotate(-20 135 200)"/>
+                <ellipse cx="130" cy="220" rx="8" ry="25" fill="#228b22" transform="rotate(-35 130 220)"/>
+
+                <!-- Hojas verdes (derecha) -->
+                <ellipse cx="260" cy="180" rx="8" ry="25" fill="#228b22" transform="rotate(30 260 180)"/>
+                <ellipse cx="265" cy="200" rx="8" ry="25" fill="#32cd32" transform="rotate(20 265 200)"/>
+                <ellipse cx="270" cy="220" rx="8" ry="25" fill="#228b22" transform="rotate(35 270 220)"/>
+
+                <!-- Texto YMP en verde -->
+                <text x="200" y="320" font-family="Arial Black" font-size="36" fill="#228b22" text-anchor="middle" font-weight="bold">YMP</text>
+            </svg>
+        </div>
+
+        <!-- Botones -->
+        <div class="button-group">
+            <?php if (!isset($_SESSION['usuario_id'])): ?>
+                <a href="auth/login.php" class="btn">INICIAR SESION</a>
+                <a href="auth/register.php" class="btn">REGISTRARSE</a>
+            <?php endif; ?>
+        </div>
+    </div>
+</body>
+</html>

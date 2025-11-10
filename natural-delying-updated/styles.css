@@ -1,0 +1,411 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #b3d4ff;
+    min-height: 100vh;
+}
+
+/* Barra de navegación */
+.navbar {
+    background-color: #5dccb8;
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 3px solid #4ab89e;
+    position: relative;
+}
+
+.navbar h1 {
+    font-size: 48px;
+    font-weight: normal;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.navbar nav {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.navbar nav a {
+    color: #000;
+    text-decoration: none;
+    font-size: 16px;
+    text-transform: uppercase;
+    transition: opacity 0.3s;
+}
+
+.navbar nav a:hover {
+    opacity: 0.7;
+}
+
+.user-icon {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #d4d4d4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Banner verde */
+.banner {
+    background-color: #c8f57e;
+    padding: 20px 40px;
+    text-align: center;
+    margin: 40px auto;
+    max-width: 800px;
+    border-radius: 5px;
+}
+
+.banner h2 {
+    font-size: 24px;
+    font-weight: normal;
+    color: #000;
+}
+
+/* Logo central */
+.logo-section {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.logo-section img {
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Botones */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 200px;
+    margin-top: 50px;
+}
+
+.btn {
+    background-color: #5dccb8;
+    color: #000;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    border: 2px solid #4ab89e;
+}
+
+.btn:hover {
+    background-color: #4ab89e;
+}
+
+/* Sección de productos */
+.products-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 50px;
+    gap: 50px;
+}
+
+.product-card {
+    text-align: center;
+    flex: 1;
+}
+
+.product-card-image {
+    position: relative;
+    display: inline-block;
+}
+
+.product-card-image img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.product-card-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(92, 204, 184, 0.9);
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    width: 80%;
+}
+
+.product-card a {
+    color: #000;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Formularios */
+.form-container {
+    max-width: 800px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.form-header {
+    background-color: #5dccb8;
+    padding: 30px;
+    margin-bottom: 40px;
+}
+
+.form-header h2 {
+    font-size: 48px;
+    font-weight: normal;
+}
+
+.user-avatar {
+    width: 150px;
+    height: 150px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #000;
+}
+
+.user-avatar-icon {
+    width: 80px;
+    height: 80px;
+    border: 3px solid #000;
+    border-radius: 50%;
+    margin-bottom: -20px;
+}
+
+.user-avatar-body {
+    width: 100px;
+    height: 60px;
+    border: 3px solid #000;
+    border-radius: 50% 50% 0 0;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    background-color: #d4d4d4;
+    border: none;
+    font-size: 16px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+}
+
+.form-buttons a,
+.form-buttons button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: underline;
+    color: #000;
+    font-family: 'Courier New', monospace;
+}
+
+/* Catálogo de jugos */
+.catalog-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.juice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.juice-item {
+    text-align: center;
+}
+
+.juice-item-image {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.juice-item-image img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.juice-item-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(200, 245, 126, 0.95);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    width: 85%;
+}
+
+.toppings-badge {
+    background-color: #c8f57e;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.toppings-list {
+    background-color: #c8f57e;
+    padding: 20px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.toppings-list ul {
+    list-style: disc;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.toppings-list li {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.info-box {
+    background-color: #5dccb8;
+    padding: 30px;
+    border-radius: 20px;
+    margin: 40px auto;
+    max-width: 900px;
+    text-align: center;
+}
+
+.info-box p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.more-btn {
+    background-color: #5dccb8;
+    color: #000;
+    padding: 10px 30px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 20px;
+    border: 2px solid #4ab89e;
+}
+
+.back-arrow {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 30px;
+    color: #000;
+    text-decoration: none;
+}
+
+/* Catálogo de frutos secos */
+.nuts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.nut-item {
+    text-align: center;
+    background-color: #a8c9ff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.nut-item-image {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.nut-item-image img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+.nut-item-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(200, 245, 126, 0.95);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    width: 80%;
+}
+
+.nut-item p {
+    font-size: 14px;
+    margin-top: 10px;
+}
