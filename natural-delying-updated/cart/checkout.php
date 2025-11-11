@@ -8,53 +8,40 @@ if (!isset($_SESSION['usuario_id'])) {
 }
 
 $usuario_id = $_SESSION['usuario_id'];
-$sql = "SELECT p.nombre, p.precio, c.cantidad FROM carrito c JOIN productos p ON c.producto_id = p.id WHERE c.usuario_id = '$usuario_id'";
-$result = $conn->query($sql);
 
-// Limpiar el carrito después de la compra
-$sql_delete = "DELETE FROM carrito WHERE usuario_id = '$usuario_id'";
-$conn->query($sql_delete);
+// Iniciar transacción
+$conn->begin_transaction();
+
+try {
+    // 1. Crear el pedido
+    $sql_pedido = "INSERT INTO pedidos (usuario_id) VALUES ('$usuario_id')";
+    $conn->query($sql_pedido);
+    $pedido_id = $conn->insert_id;
+
+    // 2. Mover productos del carrito a pedido_productos
+    $sql_carrito = "SELECT p.id, p.precio, c.cantidad FROM carrito c JOIN productos p ON c.producto_id = p.id WHERE c.usuario_id = '$usuario_id'";
+    $result_carrito = $conn->query($sql_carrito);
+
+    while ($row = $result_carrito->fetch_assoc()) {
+        $producto_id = $row['id'];
+        $cantidad = $row['cantidad'];
+        $precio = $row['precio'];
+        $sql_pedido_producto = "INSERT INTO pedido_productos (pedido_id, producto_id, cantidad, precio) VALUES ('$pedido_id', '$producto_id', '$cantidad', '$precio')";
+        $conn->query($sql_pedido_producto);
+    }
+
+    // 3. Limpiar el carrito
+    $sql_delete_carrito = "DELETE FROM carrito WHERE usuario_id = '$usuario_id'";
+    $conn->query($sql_delete_carrito);
+
+    // Confirmar transacción
+    $conn->commit();
+
+    header("Location: receipt.php?pedido_id=" . $pedido_id);
+
+} catch (Exception $e) {
+    // Revertir transacción en caso de error
+    $conn->rollback();
+    echo "Error al procesar el pedido: " . $e->getMessage();
+}
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Recibo de Compra</title>
-    <link rel="stylesheet" href="../styles.css">
-</head>
-<body>
-    <div class="container">
-        <h2>Recibo de Compra</h2>
-        <p>¡Gracias por tu compra!</p>
-        <table>
-            <tr>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Total</th>
-            </tr>
-            <?php
-            $total_carrito = 0;
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    $total_producto = $row["precio"] * $row["cantidad"];
-                    $total_carrito += $total_producto;
-                    echo "<tr>";
-                    echo "<td>" . $row["nombre"] . "</td>";
-                    echo "<td>$" . $row["precio"] . "</td>";
-                    echo "<td>" . $row["cantidad"] . "</td>";
-                    echo "<td>$" . number_format($total_producto, 2) . "</td>";
-                    echo "</tr>";
-                }
-            }
-            ?>
-            <tr>
-                <td colspan="3"><strong>Total Pagado</strong></td>
-                <td><strong>$<?php echo number_format($total_carrito, 2); ?></strong></td>
-            </tr>
-        </table>
-        <a href="../index.php" class="btn">Volver al Inicio</a>
-    </div>
-</body>
-</html>

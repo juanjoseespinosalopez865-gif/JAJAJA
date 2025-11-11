@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "natural_delying_user";
+$password = "password123";
 $dbname = "natural_delying";
 
 // Crear conexión

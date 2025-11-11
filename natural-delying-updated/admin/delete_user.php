@@ -9,6 +9,11 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['es_admin'] != 1) {
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
+
+    // Para mantener la integridad de la base de datos, podrías considerar anonimizar
+    // los pedidos del usuario en lugar de borrarlos, o impedir borrar usuarios con pedidos.
+    // Por simplicidad, aquí solo borraremos al usuario.
+
     $sql = "DELETE FROM usuarios WHERE id=$id";
 
     if ($conn->query($sql) === TRUE) {

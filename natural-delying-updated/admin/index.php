@@ -7,8 +7,13 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['es_admin'] != 1) {
     exit();
 }
 
-$sql = "SELECT id, nombre, email FROM usuarios";
-$result = $conn->query($sql);
+// Obtener usuarios
+$sql_usuarios = "SELECT id, nombre, email FROM usuarios";
+$result_usuarios = $conn->query($sql_usuarios);
+
+// Obtener pedidos
+$sql_pedidos = "SELECT p.id, u.nombre as usuario_nombre, p.fecha, p.estado FROM pedidos p JOIN usuarios u ON p.usuario_id = u.id ORDER BY p.fecha DESC";
+$result_pedidos = $conn->query($sql_pedidos);
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +26,8 @@ $result = $conn->query($sql);
 <body>
     <div class="container">
         <h2>Panel de Administración</h2>
+
+        <h3>Usuarios</h3>
         <table>
             <tr>
                 <th>ID</th>
@@ -29,8 +36,8 @@ $result = $conn->query($sql);
                 <th>Acción</th>
             </tr>
             <?php
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
+            if ($result_usuarios->num_rows > 0) {
+                while($row = $result_usuarios->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>" . $row["id"] . "</td>";
                     echo "<td>" . $row["nombre"] . "</td>";
@@ -40,6 +47,36 @@ $result = $conn->query($sql);
                 }
             } else {
                 echo "<tr><td colspan='4'>No hay usuarios</td></tr>";
+            }
+            ?>
+        </table>
+
+        <h3 style="margin-top: 40px;">Pedidos</h3>
+        <table>
+            <tr>
+                <th>ID Pedido</th>
+                <th>Usuario</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+            <?php
+            if ($result_pedidos->num_rows > 0) {
+                while($row = $result_pedidos->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row["id"] . "</td>";
+                    echo "<td>" . $row["usuario_nombre"] . "</td>";
+                    echo "<td>" . $row["fecha"] . "</td>";
+                    echo "<td>" . $row["estado"] . "</td>";
+                    echo "<td>";
+                    if ($row["estado"] == 'Pendiente') {
+                        echo "<a href='cancel_order.php?id=" . $row["id"] . "'>Cancelar</a>";
+                    }
+                    echo "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='5'>No hay pedidos</td></tr>";
             }
             ?>
         </table>
